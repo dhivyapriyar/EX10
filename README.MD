@@ -16,95 +16,96 @@ Step 4 Apply EDA /Data visualization techniques to all the features of the data 
 
 # CODE
 
+import numpy as np
+
 import pandas as pd
+
+import os
 
 import seaborn as sns
 
 import matplotlib.pyplot as plt
 
-df = sns.load_dataset("tips")
+df = pd.read_csv("/content/Disease_symptom_and_patient_profile_dataset.csv")
+
+df
 
 df.head()
 
+df.info()
+
+df.tail()
+
 df.isnull().sum()
 
-plt.figure(figsize=(5,5))
+df.shape
 
-plt.title("Data with Outliers")
+df.nunique()
 
-df.boxplot()
+sns.catplot(x = 'Outcome Variable' , y = 'Age' , data = df , kind = "swarm")
 
-plt.show()
+plt.figure(figsize=(20,10))
 
-plt.figure(figsize=(5,5))
+sns.lineplot(x='Disease',y='Age',data =df);
 
-cols = ['size','tip','total_bill']
+plt.figure(figsize=(20,10))
 
-Q1 = df[cols].quantile(0.25)
+sns.barplot(x='Fever',y='Age',data =df);
 
-Q3 = df[cols].quantile(0.75)
+sns.displot(df['Age'] , kde=True)
 
-IQR = Q3 - Q1
+df.groupby('Gender').size().plot(kind='pie', autopct='%.2f')
 
-df = df[~((df[cols] < (Q1 - 1.5 * IQR)) |(df[cols] > (Q3 + 1.5 * IQR))).any(axis=1)]
+sns.catplot(x='Cough' , kind='count',data=df , hue = "Cholesterol Level")
 
-plt.title("Dataset after removing outliers")
+df.groupby('Blood Pressure').size().plot(kind='pie', autopct='%.2f')
 
-df.boxplot()
+sns.catplot(x='Gender' , kind='count',data=df , hue = "Cholesterol Level")
 
-plt.show()
+df = df.iloc[:,1:]
 
-df['sex'].unique()
+df.groupby('Fatigue').size().plot(kind='pie', autopct='%.2f')
 
-!pip install --upgrade category_encoders
+from sklearn import datasets
 
-from category_encoders import BinaryEncoder
+iris = datasets.load_iris()
 
-be = BinaryEncoder()
+X = iris.data[:, [0, 2]]
 
-data = be.fit_transform(df['sex'])
+Y = iris.target
 
-df = pd.concat([df,data],axis=1)
+from sklearn.model_selection import train_test_split
 
-df
-
-df['smoker'].unique()
-
-data = be.fit_transform(df['smoker'])
-
-df = pd.concat([df,data],axis=1)
-
-df
-
-df['day'].unique()
-
-from sklearn.preprocessing import LabelEncoder,OrdinalEncoder
-
-clim = ['Thur','Fri','Sat','Sun']
-
-en= OrdinalEncoder(categories = [clim])
-
-df['day']=en.fit_transform(df[["day"]])
-
-df
-
-df['time'].unique()
-
-le = LabelEncoder()
-
-df['time'] = le.fit_transform(df[["time"]])
-
-df
-
-df.drop('sex',axis=1,inplace=True)
-
-df.drop('smoker',axis=1,inplace=True)
+X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=0.3, random_state=1)
 
 from sklearn.preprocessing import MinMaxScaler, StandardScaler
 
+from sklearn import datasets
+
+iris = datasets.load_iris()
+
+X = iris.data[:, [0, 2]]
+
+Y = iris.target
+
+from sklearn.model_selection import train_test_split
+
+X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=0.3, random_state=1)
+
+from sklearn.preprocessing import MinMaxScaler, StandardScaler
+
+# Example dataset
+
+data = [[10, 20, 30],
+[5, 15, 25],
+[3, 6, 9],
+[8, 12, 16]]
+
+# Min-max scaling
+
 scaler = MinMaxScaler()
 
-scaled_data = scaler.fit_transform(df)
+scaled_data = scaler.fit_transform(data)
 
 print("Min-max scaled data:")
 
@@ -112,63 +113,49 @@ print(scaled_data)
 
 scaler = StandardScaler()
 
-scaled_data = scaler.fit_transform(df)
+scaled_data = scaler.fit_transform(data)
 
 print("Standard scaled data:")
 
 print(scaled_data)
 
-import seaborn as sns
+np.random.seed(42)
 
-sns.scatterplot(data=df)
+data = np.random.normal(0, 1, 1000)
 
-sns.displot(df['size'],kde=True)
+plt.figure(figsize=(8, 6))
 
-sns.scatterplot(x="total_bill", y="tip", data=df)
+plt.hist(data, bins=30, edgecolor='black')
 
-plt.title("Correlation between Tip Amount and Total Bill Amount")
+plt.xlabel('Value')
 
-plt.show()
+plt.ylabel('Frequency')
 
-df["tip_percent"] = df["tip"] / df["total_bill"]
-
-sns.barplot(x=df['size'],y=df['tip_percent'],data=df)
-
-plt.title("Tip Percentage by Dining Party Size")
+plt.title('Histogram')
 
 plt.show()
 
-sns.barplot(x=df['time'], y=df['total_bill'])
-
-plt.title("Highest Total Bill Amount by Time")
-
-plt.show()
-
-df.corr()
-
-sns.heatmap(df.corr(),annot=True)
 
 # OUTPUT
+![Screenshot 2023-06-05 195552](https://github.com/dhivyapriyar/EX10/assets/119477552/34736c39-f617-4990-8d45-2383e03e105d)
+![Screenshot 2023-06-05 195605](https://github.com/dhivyapriyar/EX10/assets/119477552/3db7602c-2921-473a-bbf0-44c756e910f5)
+![Screenshot 2023-06-05 195614](https://github.com/dhivyapriyar/EX10/assets/119477552/093fb1d0-07a7-44cf-ad6e-8493de4d13c0)
+![Screenshot 2023-06-05 195625](https://github.com/dhivyapriyar/EX10/assets/119477552/1b842ef1-3af7-40a0-bff7-8225fe929693)
+![Screenshot 2023-06-05 195631](https://github.com/dhivyapriyar/EX10/assets/119477552/039814cf-ca4d-4b09-bb9e-b45d531c28df)
+![Screenshot 2023-06-05 195637](https://github.com/dhivyapriyar/EX10/assets/119477552/dd2e9a8a-5b2a-4b3f-b21a-a715a8515132)
+![Screenshot 2023-06-05 195643](https://github.com/dhivyapriyar/EX10/assets/119477552/3ccf909c-1ef0-4d4e-baf5-2663078afc03)
+![Screenshot 2023-06-05 195652](https://github.com/dhivyapriyar/EX10/assets/119477552/a7fde7e3-9bfa-4334-8170-22d92091ebc5)
+![image](https://github.com/dhivyapriyar/EX10/assets/119477552/7c0b7ef9-1c67-4bb8-9b46-12f21ee83bf5)
+![image](https://github.com/dhivyapriyar/EX10/assets/119477552/46be219a-b03b-485e-a380-c9bf4f4c33ec)
+![image](https://github.com/dhivyapriyar/EX10/assets/119477552/bed98035-2045-4e0e-a458-1cadd122a703)
+![image](https://github.com/dhivyapriyar/EX10/assets/119477552/470d7c36-dd62-42ad-b55d-3187629fbb9e)
+![image](https://github.com/dhivyapriyar/EX10/assets/119477552/fe661d4b-be75-4974-ad23-9f6374fc9936)
+![image](https://github.com/dhivyapriyar/EX10/assets/119477552/bb81300f-69f6-4fbf-b1ff-921e96deec47)
+![image](https://github.com/dhivyapriyar/EX10/assets/119477552/2f968043-7fcf-40eb-845c-439206fed153)
+![image](https://github.com/dhivyapriyar/EX10/assets/119477552/cad5a3ed-904d-4d5d-81f0-ab8ea9db2120)
+![image](https://github.com/dhivyapriyar/EX10/assets/119477552/e6937ad5-fb5b-4985-a56f-710b56dbe1fc)
 
-![image](https://github.com/dhivyapriyar/EX10/assets/119477552/4c7147cc-b102-4b74-8c13-39d45ced8e9f)
-![image](https://github.com/dhivyapriyar/EX10/assets/119477552/e55c1f03-3018-4e2a-bfea-eebf7d83b92e)
-![image](https://github.com/dhivyapriyar/EX10/assets/119477552/5805cccf-04a4-4009-8dd8-225cb735b7ef)
-![image](https://github.com/dhivyapriyar/EX10/assets/119477552/f84c98a4-dbe2-4eca-83b2-309513037f17)
-![image](https://github.com/dhivyapriyar/EX10/assets/119477552/75549fad-d58f-4201-871f-ddba55e4f2b1)
-![image](https://github.com/dhivyapriyar/EX10/assets/119477552/f8c9d505-60e6-4658-99f9-810eaf088600)
-![image](https://github.com/dhivyapriyar/EX10/assets/119477552/629686db-c851-4b95-8350-179da1019af7)
-![image](https://github.com/dhivyapriyar/EX10/assets/119477552/ea991415-87e9-4c04-8e19-bfb98e1d96bd)
-![image](https://github.com/dhivyapriyar/EX10/assets/119477552/a938ed6c-5410-4587-96d6-479c62159146)
-![image](https://github.com/dhivyapriyar/EX10/assets/119477552/b09288f3-4846-4992-b7d9-7bf4bff4f367)
-![image](https://github.com/dhivyapriyar/EX10/assets/119477552/0f7a15bb-f061-4045-bc60-73ca2a22930a)
-![image](https://github.com/dhivyapriyar/EX10/assets/119477552/6829ab00-9671-4ffb-9055-eac262254401)
-![image](https://github.com/dhivyapriyar/EX10/assets/119477552/2adf32fe-aef9-4ac9-9b1a-49b39cfeb6fb)
-![image](https://github.com/dhivyapriyar/EX10/assets/119477552/119f8d61-8215-49d2-9287-886f7ba7e63a)
-![image](https://github.com/dhivyapriyar/EX10/assets/119477552/5fec2cf6-82df-40b9-9d6e-f0f458b77368)
-![image](https://github.com/dhivyapriyar/EX10/assets/119477552/a0cc8b17-c311-40dc-9800-08f7c0a65f37)
-![image](https://github.com/dhivyapriyar/EX10/assets/119477552/fe79dc86-6dad-4a08-ab6a-24fbe068014e)
-![image](https://github.com/dhivyapriyar/EX10/assets/119477552/fb4aea0f-d152-46b4-9037-8f0c8ba3321c)
-![image](https://github.com/dhivyapriyar/EX10/assets/119477552/496366dc-4651-4d3c-ae3d-3e1433b66283)
+
 
 # RESULT
 Thus Data Science Process on a complex dataset was performed successfully.
