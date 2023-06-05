@@ -150,3 +150,25 @@ sns.heatmap(df.corr(),annot=True)
 
 # OUTPUT
 
+![image](https://github.com/dhivyapriyar/EX10/assets/119477552/4c7147cc-b102-4b74-8c13-39d45ced8e9f)
+![image](https://github.com/dhivyapriyar/EX10/assets/119477552/e55c1f03-3018-4e2a-bfea-eebf7d83b92e)
+![image](https://github.com/dhivyapriyar/EX10/assets/119477552/5805cccf-04a4-4009-8dd8-225cb735b7ef)
+![image](https://github.com/dhivyapriyar/EX10/assets/119477552/f84c98a4-dbe2-4eca-83b2-309513037f17)
+![image](https://github.com/dhivyapriyar/EX10/assets/119477552/75549fad-d58f-4201-871f-ddba55e4f2b1)
+![image](https://github.com/dhivyapriyar/EX10/assets/119477552/f8c9d505-60e6-4658-99f9-810eaf088600)
+![image](https://github.com/dhivyapriyar/EX10/assets/119477552/629686db-c851-4b95-8350-179da1019af7)
+![image](https://github.com/dhivyapriyar/EX10/assets/119477552/ea991415-87e9-4c04-8e19-bfb98e1d96bd)
+![image](https://github.com/dhivyapriyar/EX10/assets/119477552/a938ed6c-5410-4587-96d6-479c62159146)
+![image](https://github.com/dhivyapriyar/EX10/assets/119477552/b09288f3-4846-4992-b7d9-7bf4bff4f367)
+![image](https://github.com/dhivyapriyar/EX10/assets/119477552/0f7a15bb-f061-4045-bc60-73ca2a22930a)
+![image](https://github.com/dhivyapriyar/EX10/assets/119477552/6829ab00-9671-4ffb-9055-eac262254401)
+![image](https://github.com/dhivyapriyar/EX10/assets/119477552/2adf32fe-aef9-4ac9-9b1a-49b39cfeb6fb)
+![image](https://github.com/dhivyapriyar/EX10/assets/119477552/119f8d61-8215-49d2-9287-886f7ba7e63a)
+![image](https://github.com/dhivyapriyar/EX10/assets/119477552/5fec2cf6-82df-40b9-9d6e-f0f458b77368)
+![image](https://github.com/dhivyapriyar/EX10/assets/119477552/a0cc8b17-c311-40dc-9800-08f7c0a65f37)
+![image](https://github.com/dhivyapriyar/EX10/assets/119477552/fe79dc86-6dad-4a08-ab6a-24fbe068014e)
+![image](https://github.com/dhivyapriyar/EX10/assets/119477552/fb4aea0f-d152-46b4-9037-8f0c8ba3321c)
+![image](https://github.com/dhivyapriyar/EX10/assets/119477552/496366dc-4651-4d3c-ae3d-3e1433b66283)
+
+# RESULT
+Thus Data Science Process on a complex dataset was performed successfully.
